@@ -15,6 +15,7 @@ const (
 	loginAttempts = 10
 )
 
+// API is a singleton client for Yandex.Taxi API
 type API struct {
 	clientID string
 	login    string
@@ -22,6 +23,7 @@ type API struct {
 	session  *grequests.Session
 }
 
+// Init establishes authenticated session with Yandex.Passport
 func (a *API) Init(login, password, clientID string) error {
 	if login == "" || password == "" || clientID == "" {
 		return fmt.Errorf("login, password and clientID must all be specified")
@@ -51,12 +53,15 @@ func (a *API) tryLogin(attempt int) error {
 		},
 	})
 
-	a.session.Post(passportURL, &grequests.RequestOptions{
+	_, err := a.session.Post(passportURL, &grequests.RequestOptions{
 		Data: map[string]string{
 			"login":    a.login,
 			"password": a.password,
 		},
 	})
+	if err != nil {
+		return repeat.HintTemporary(err)
+	}
 
 	if len(a.session.HTTPClient.Jar.Cookies(yandexURL)) < 5 {
 		return repeat.HintTemporary(fmt.Errorf("failed to log in for attempt %d", attempt))

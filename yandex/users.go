@@ -6,6 +6,7 @@ import (
 	"github.com/levigross/grequests"
 )
 
+// User is a single Yandex.Taxi user
 type User struct {
 	ID         string `json:"_id,omitempty"`
 	Name       string `json:"fullname"`
@@ -22,6 +23,7 @@ type User struct {
 	} `json:"role"`
 }
 
+// UserResponse is Yandex.Taxi API DTO for users
 type UserResponse struct {
 	Items []User `json:"items"`
 }
@@ -30,6 +32,7 @@ func (a API) buildURL(action string) string {
 	return fmt.Sprintf("%s/client/%s/%s", apiURL, a.clientID, action)
 }
 
+// GetUsersByRole fetches all existing users and then filters them by role from Yandex.Taxi API
 func (a API) GetUsersByRole(role string) (users map[string]User, err error) {
 	usersResponse := &UserResponse{}
 	resp, err := a.session.Get(a.buildURL("user"), &grequests.RequestOptions{
@@ -65,6 +68,7 @@ func (a API) GetUsersByRole(role string) (users map[string]User, err error) {
 	return
 }
 
+// DisableUser makes it impossible for user to call a taxi
 func (a *API) DisableUser(user User) error {
 	userID := user.ID
 	user.ID = ""
@@ -81,6 +85,7 @@ func (a *API) DisableUser(user User) error {
 	return nil
 }
 
+// EnableUser makes it possible for user to call a taxi
 func (a *API) EnableUser(user User) error {
 	userID := user.ID
 	user.ID = ""
