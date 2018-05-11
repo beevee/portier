@@ -1,7 +1,9 @@
 package yandex
 
 import (
+	"encoding/json"
 	"fmt"
+	"strings"
 
 	"github.com/levigross/grequests"
 )
@@ -44,7 +46,8 @@ func (a API) GetUsersByRole(role string) (users map[string]User, err error) {
 		return
 	}
 
-	err = resp.JSON(usersResponse)
+	stringResponse := strings.Replace(resp.String(), "Infinity", "10000000", -1)
+	err = json.Unmarshal([]byte(stringResponse), usersResponse)
 	if err != nil {
 		return
 	}
