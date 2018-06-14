@@ -12,7 +12,7 @@ import (
 const (
 	apiURL        = "https://business.taxi.yandex.ru/api/1.0"
 	passportURL   = "https://passport.yandex.ru/auth"
-	loginAttempts = 10
+	loginAttempts = 100
 )
 
 // API is a singleton client for Yandex.Taxi API
