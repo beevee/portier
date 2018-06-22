@@ -38,7 +38,7 @@ func (a *API) Init(login, password, clientID string) error {
 		repeat.StopOnSuccess(),
 		repeat.LimitMaxTries(loginAttempts),
 		repeat.WithDelay(
-			repeat.FullJitterBackoff(10*time.Second).WithMaxDelay(10*time.Minute).Set(),
+			repeat.FullJitterBackoff(10*time.Second).WithMaxDelay(5*time.Minute).Set(),
 		),
 	)
 }
