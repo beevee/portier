@@ -46,8 +46,7 @@ var usersCmd = &cobra.Command{
 		api := &yandex.API{}
 		cmd.Print("initializing Yandex API\n")
 		err := api.Init(
-			viper.GetString("login"),
-			viper.GetString("password"),
+			viper.GetString("session_id"),
 			viper.GetString("client_id"))
 		if err != nil {
 			cmd.Printf("failed to init Yandex API: %s\n", err)
