@@ -76,6 +76,7 @@ func (a *API) DisableUser(user User) error {
 	userID := user.ID
 	user.ID = ""
 	user.IsActive = false
+	user.Role.Name = "" // weirdly, leaving name non-empty leads to 400 Bad Request in this API request
 	resp, err := a.session.Put(a.buildURL("user")+"/"+userID+"/", &grequests.RequestOptions{
 		JSON: user,
 	})
@@ -93,6 +94,7 @@ func (a *API) EnableUser(user User) error {
 	userID := user.ID
 	user.ID = ""
 	user.IsActive = true
+	user.Role.Name = "" // weirdly, leaving name non-empty leads to 400 Bad Request in this API request
 	resp, err := a.session.Put(a.buildURL("user")+"/"+userID+"/", &grequests.RequestOptions{
 		JSON: user,
 	})
