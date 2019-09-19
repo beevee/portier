@@ -1,30 +1,35 @@
 # Portier
 
 ```
-Portier provides convenience functions for corporate Yandex.Taxi accounts
+NAME:
+   portier - Provides convenience functions for corporate Yandex.Taxi accounts
 
-Usage:
-  portier [command]
+USAGE:
+   portier [global options] command [command options] [arguments...]
 
-Available Commands:
-  help        Help about any command
-  users       Batch process corporate users
+VERSION:
+   1.0.0
 
-Flags:
-  -h, --help   help for portier
+COMMANDS:
+   users, u  Enables or disables orders from application for user role
+   help, h   Shows a list of commands or help for one command
 
-Use "portier [command] --help" for more information about a command.
+GLOBAL OPTIONS:
+   --sessionid value, -s value  value of Yandex Session_id cookie [$SESSION_ID]
+   --clientid value, -c value   Yandex client id [$CLIENT_ID]
+   --help, -h                   show help
+   --version, -v                print the version
 ```
 
 ## Users
 
 ```
-Batch process corporate users
+NAME:
+   portier users - Enables or disables orders from application for user role
 
-Usage:
-  portier users (enable|disable) [flags]
+USAGE:
+   portier users [command options] [arguments...]
 
-Flags:
-  -h, --help          help for users
-      --role string   operate on users in this role only (default "Кирпичников")
+OPTIONS:
+   --role value  operate on users in this role only (default: "Кирпичников")
 ```

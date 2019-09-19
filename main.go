@@ -13,14 +13,14 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "portier"
 	app.HelpName = "portier"
-	app.Usage = "provides convenience functions for corporate Yandex.Taxi accounts"
+	app.Usage = "Provides convenience functions for corporate Yandex.Taxi accounts"
 	app.Version = "1.0.0"
 
 	app.Commands = []cli.Command{
 		{
 			Name:    "users",
 			Aliases: []string{"u"},
-			Usage:   "enable or disable orders from application for user role",
+			Usage:   "Enables or disables orders from application for user role",
 			Flags: []cli.Flag{
 				cli.StringFlag{
 					Name:  "role",
