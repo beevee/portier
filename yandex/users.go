@@ -8,6 +8,14 @@ import (
 	"github.com/levigross/grequests"
 )
 
+// Restriction is an element of a role that makes coding slightly easier
+type Restriction struct {
+	Days      []string `json:"days,omitempty"`
+	StartTime string   `json:"start_time,omitempty"`
+	EndTime   string   `json:"end_time,omitempty"`
+	Type      string   `json:"type,omitempty"`
+}
+
 // User is a single Yandex.Taxi user
 type User struct {
 	ID         string `json:"_id,omitempty"`
@@ -18,17 +26,12 @@ type User struct {
 	CostCenter string `json:"cost_center"`
 	IsActive   bool   `json:"is_active"`
 	Role       struct {
-		ID              string   `json:"role_id,omitempty"`
-		Name            string   `json:"name,omitempty"`
-		Limit           float32  `json:"limit,omitempty"`
-		Classes         []string `json:"classes,omitempty"`
-		NoSpecificLimit bool     `json:"no_specific_limit,omitempty"`
-		Restrictions    []struct {
-			Days      []string `json:"days,omitempty"`
-			StartTime string   `json:"start_time,omitempty"`
-			EndTime   string   `json:"end_time,omitempty"`
-			Type      string   `json:"type,omitempty"`
-		} `json:"restrictions,omitempty"`
+		ID              string        `json:"role_id,omitempty"`
+		Name            string        `json:"name,omitempty"`
+		Limit           float32       `json:"limit,omitempty"`
+		Classes         []string      `json:"classes,omitempty"`
+		NoSpecificLimit bool          `json:"no_specific_limit,omitempty"`
+		Restrictions    []Restriction `json:"restrictions,omitempty"`
 	} `json:"role"`
 }
 
