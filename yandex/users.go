@@ -18,12 +18,17 @@ type User struct {
 	CostCenter string `json:"cost_center"`
 	IsActive   bool   `json:"is_active"`
 	Role       struct {
-		ID              string                   `json:"role_id,omitempty"`
-		Name            string                   `json:"name,omitempty"`
-		Limit           float32                  `json:"limit,omitempty"`
-		Classes         []string                 `json:"classes,omitempty"`
-		NoSpecificLimit bool                     `json:"no_specific_limit,omitempty"`
-		Restrictions    []map[string]interface{} `json:"restrictions,omitempty"`
+		ID              string   `json:"role_id,omitempty"`
+		Name            string   `json:"name,omitempty"`
+		Limit           float32  `json:"limit,omitempty"`
+		Classes         []string `json:"classes,omitempty"`
+		NoSpecificLimit bool     `json:"no_specific_limit,omitempty"`
+		Restrictions    []struct {
+			Days      []string `json:"days,omitempty"`
+			StartTime string   `json:"start_time,omitempty"`
+			EndTime   string   `json:"end_time,omitempty"`
+			Type      string   `json:"type,omitempty"`
+		} `json:"restrictions,omitempty"`
 	} `json:"role"`
 }
 
